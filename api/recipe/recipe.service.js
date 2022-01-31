@@ -40,7 +40,8 @@ async function remove(recipeId) {
 async function add(recipe) {
   try {
     recipe.createdAt = Date.now();
-    recipe.inStock = true;
+    recipe.userId = ObjectId(recipe.userId)
+    // recipe
     const collection = await dbService.getCollection('recipe');
     await collection.insertOne(recipe);
     return recipe;

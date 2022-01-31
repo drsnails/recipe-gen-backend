@@ -33,7 +33,7 @@ async function getRecipeById(req, res) {
 
 async function addRecipe(req, res) {
     try {
-        const { recipe } = req.body;
+        const recipe  = req.body;
         const addedRecipe = await recipeService.add(recipe);
         res.json(addedRecipe);
     } catch (err) {
@@ -49,7 +49,6 @@ async function updateRecipe(req, res) {
         const recipe  = req.body;
         const { user } = req.session.user;
         const savedRecipe = await recipeService.update(recipe);
-        console.log('recipe to save', savedRecipe);
         res.json(savedRecipe);
     } catch (err) {
         logger.error('Failed to update recipe', err);

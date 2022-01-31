@@ -16,6 +16,7 @@ const router = express.Router();
 router.get('/', log, getRecipes);
 router.get('/:id', getRecipeById);
 router.put('/', updateRecipe);
-router.delete('/:id', requireAuth, requireAdmin, removeRecipe);
+router.post('/', addRecipe);
+router.delete('/:id', requireAuth, removeRecipe);
 
 module.exports = router;
