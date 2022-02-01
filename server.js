@@ -58,6 +58,7 @@ app.get('/**', (req, res) => {
 });
 
 const logger = require('./services/logger.service');
+const recipeService = require('./api/recipe/recipe.service');
 const port = process.env.PORT || 3030;
 app.listen(port, () => {
   logger.info('Server is running on port: ' + port);
@@ -85,3 +86,17 @@ async function populate() {
   tasks = await collection.insertMany(recipes)
 }
 // logger.info('Req!!!')
+
+
+// changeData()
+async function changeData() {
+  const collection = await dbService.getCollection('recipe')
+  const recipes = await collection.find({}).toArray();
+  recipes.forEach(recipe => {
+    // recipe.instructions = ''
+    // recipeService.update(recipe)
+
+  })
+
+
+}
