@@ -67,36 +67,41 @@ async function update(recipe) {
   }
 }
 
+async function updateRecipe(recipeId, field, value) {
+  try {
+  
+    const collection = await dbService.getCollection('recipe');
+    await collection.updateOne({ _id: ObjectId(recipeId) }, { $set: { [field]: value } });
+    // return recipe;
+  } catch (err) {
+    logger.error(`Can not update recipe ${recipe._id}`, err);
+    throw err;
+  }
+}
+
+async function updateIng(recipeId, field, value, ingId) {
+  try {
+    const collection = await dbService.getCollection('recipe');
+    const recipe = await collection.updateOne({ _id: ObjectId(recipeId), "ingredients.id": ingId }, { $set: { [`ingredients.$.${field}`]: value } });
+    console.log('updateIng -> recipe', recipe)
+    return recipe;
+  } catch (err) {
+    logger.error(`Can not update recipe ${recipe._id}`, err);
+    throw err;
+  }
+}
+
 module.exports = {
   remove,
   query,
   getById,
   add,
   update,
+  updateRecipe,
+  updateIng,
 };
 
-function _createReviews() {
-  return [
-    {
-      name: 'Muki Ben Puki',
-      rate: 4,
-      addedAt: '10/09/2020',
-      txt: 'Wow, thats a great game! im gonna play it so much!!',
-    },
-    {
-      name: 'Shuki Laka Boom',
-      rate: 1,
-      addedAt: '25/07/2020',
-      txt: 'Worst game EVAHHHHHHH, cant stand it!',
-    },
-    {
-      name: 'Nana Banani',
-      rate: 5,
-      addedAt: '13/01/2021',
-      txt: 'Played it with my entire family and loved every minute!!! wow!!!!!!!!!!!!!!!!!!',
-    },
-  ];
-}
+
 
 function _buildCriteria(filterBy) {
   const criteria = {};

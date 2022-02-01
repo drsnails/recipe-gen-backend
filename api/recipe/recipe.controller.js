@@ -33,7 +33,7 @@ async function getRecipeById(req, res) {
 
 async function addRecipe(req, res) {
     try {
-        const recipe  = req.body;
+        const recipe = req.body;
         const addedRecipe = await recipeService.add(recipe);
         res.json(addedRecipe);
     } catch (err) {
@@ -46,8 +46,27 @@ async function addRecipe(req, res) {
 
 async function updateRecipe(req, res) {
     try {
-        const recipe  = req.body;
-        const { user } = req.session.user;
+        const { recipe, field, value, ingId } = req.body;
+        let savedRecipe
+        if (ingId && field !== null && value !== null) {
+            savedRecipe = await recipeService.updateIng(recipe._id, field, value, ingId);
+        } else if (field && value) {
+            savedRecipe = await recipeService.updateRecipe(recipe._id, field, value);
+        } else {
+            savedRecipe = await recipeService.update(recipe);
+
+        }
+        res.json(savedRecipe);
+    } catch (err) {
+        logger.error('Failed to update recipe', err);
+        res.status(500).send({ err: 'Failed to update recipe' });
+    }
+}
+
+async function updateIngredient(req, res) {
+    try {
+        const recipe = req.body;
+        // const { user } = req.session.user;
         const savedRecipe = await recipeService.update(recipe);
         res.json(savedRecipe);
     } catch (err) {
@@ -55,6 +74,7 @@ async function updateRecipe(req, res) {
         res.status(500).send({ err: 'Failed to update recipe' });
     }
 }
+
 
 // Delete
 
