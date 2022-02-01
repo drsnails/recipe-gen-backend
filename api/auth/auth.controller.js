@@ -10,6 +10,7 @@ async function login(req, res) {
     try {
         const user = await authService.login(username, password)
         req.session.user = user
+        req.session.cookie.maxAge = 1000 * 60 * 60;
         req.session.save()
         res.json(user)
     } catch (err) {
@@ -29,6 +30,7 @@ async function signup(req, res) {
         logger.debug(`auth.route - new account created: ` + JSON.stringify(account))
         const user = await authService.login(username, password)
         req.session.user = user
+        req.session.save()
         res.json(user)
     } catch (err) {
         logger.error('Failed to signup ' + err)
@@ -45,8 +47,14 @@ async function logout(req, res) {
     }
 }
 
+async function getUserFromSession(req, res) {
+    res.json(req.session.user)
+    
+}
+
 module.exports = {
     login,
     signup,
-    logout
+    logout,
+    getUserFromSession
 }
