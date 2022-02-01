@@ -1,5 +1,7 @@
 const authService = require('./auth.service')
-const logger = require('../../services/logger.service')
+const logger = require('../../services/logger.service');
+const { getFirstRecipe } = require('../../services/utilService');
+const recipeService = require('../recipe/recipe.service');
 
 async function login(req, res) {
     const { username, password } = req.body
@@ -7,7 +9,6 @@ async function login(req, res) {
     
     try {
         const user = await authService.login(username, password)
-        console.log('login -> user', user)
         req.session.user = user
         req.session.save()
         res.json(user)
@@ -23,6 +24,8 @@ async function signup(req, res) {
         const { username, password, email } = req.body
         logger.debug(email + ', ' + username + ', ' + password)
         const account = await authService.signup(username, password, email)
+        const recipe = getFirstRecipe(account._id)
+        const recipeToAdd = await recipeService.add(recipe)
         logger.debug(`auth.route - new account created: ` + JSON.stringify(account))
         const user = await authService.login(username, password)
         req.session.user = user
