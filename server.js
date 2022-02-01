@@ -83,9 +83,8 @@ async function populate() {
     },
 
   ]
-  tasks = await collection.insertMany(recipes)
+  // tasks = await collection.insertMany(recipes)
 }
-// logger.info('Req!!!')
 
 
 // changeData()
@@ -97,6 +96,7 @@ async function changeData() {
     // recipeService.update(recipe)
 
   })
+  
 
 
 }
