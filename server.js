@@ -92,7 +92,7 @@ async function changeData() {
   const collection = await dbService.getCollection('recipe')
   const recipes = await collection.find({}).toArray();
   recipes.forEach(recipe => {
-    // recipe.instructions = ''
+    // recipe.instructions ??= ''
     // recipeService.update(recipe)
 
   })
