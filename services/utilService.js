@@ -7,6 +7,7 @@ const getFirstRecipe = (userId) => {
         createdAt: Date.now(),
         userId,
         ingToScaleId: 'btkkq',
+        instructions: 'Blend everything and cook for 30 minutes',
         ingredients: [
             {
                 id: 'btkkq',
@@ -18,6 +19,12 @@ const getFirstRecipe = (userId) => {
                 id: 'eGJqi',
                 name: 'Mango',
                 amount: 700,
+                units: 'g'
+            },
+            {
+                id: 'sa3Ja',
+                name: 'Garlic',
+                amount: 60,
                 units: 'g'
             },
             {
@@ -40,7 +47,7 @@ const getFirstRecipe = (userId) => {
             },
             {
                 id: 'm5fRb',
-                name: 'Maple Syrop',
+                name: 'Maple Syrup',
                 amount: 4,
                 units: 'tableSpoon'
             }
