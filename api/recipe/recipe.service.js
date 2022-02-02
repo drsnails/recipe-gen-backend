@@ -107,21 +107,11 @@ function _buildCriteria(userId, filterBy) {
   const criteria = {};
   const { term } = filterBy;
 
-  // console.log('_buildCriteria -> term', term)
-
   if (term) {
     const txtCriteria = { $regex: term, $options: 'i' };
-    // criteria.name = txtCriteria;
     criteria['$or'] = [{ name: txtCriteria }, { ['ingredients.name']: txtCriteria }]
-    // criteria.ingredients = { name: txtCriteria }
   }
-  // { 'instock.qty': { $lte: 20 } }
-  // if (labels) {
-  //   criteria.labels = { $all: labels };
-  // }
-  // if (filterBy.type) {
-  //   criteria.inStock = { $eq: filterBy.type === 'instock' };
-  // }
+
   criteria.userId = ObjectId(userId)
   return criteria;
 }
