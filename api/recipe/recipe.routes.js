@@ -17,6 +17,6 @@ router.get('/', log, getRecipes);
 router.get('/:id', getRecipeById);
 router.put('/', updateRecipe);
 router.post('/', addRecipe);
-router.delete('/:id', requireAuth, removeRecipe);
+router.delete('/:id', removeRecipe);
 
 module.exports = router;
