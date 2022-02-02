@@ -5,10 +5,11 @@ const logger = require('../../services/logger.service');
 
 async function getRecipes(req, res) {
     try {
-        const { userId } = req.query;
-        console.log('getRecipes -> userId', userId)
+        const { userId, filterBy: _filterBy } = req.query;
+        const filterBy = JSON.parse(_filterBy)
+        // console.log('getRecipes -> filterBy', filterBy)
         // console.log('querying');
-        const recipes = await recipeService.query(userId);
+        const recipes = await recipeService.query(userId, filterBy);
         res.json(recipes);
     } catch (err) {
         logger.error('Failed to get recipes', err);

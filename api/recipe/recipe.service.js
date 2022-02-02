@@ -2,12 +2,12 @@ const dbService = require('../../services/db.service');
 const logger = require('../../services/logger.service');
 const ObjectId = require('mongodb').ObjectId;
 
-async function query(userId = '') {
-  console.log('query -> userId', userId)
+async function query(userId = '', filterBy = { term: '' }) {
+  console.log('query -> filterBy', filterBy)
   try {
-    // const criteria = _buildCriteria(filterBy);
+    const criteria = _buildCriteria(userId, filterBy);
     const collection = await dbService.getCollection('recipe');
-    const recipes = await collection.find({ userId: ObjectId(userId) }).toArray();
+    const recipes = await collection.find(criteria).toArray();
     return recipes;
   } catch (err) {
     logger.error('Can not find recipes', err);
@@ -69,7 +69,7 @@ async function update(recipe) {
 
 async function updateRecipe(recipeId, field, value) {
   try {
-  
+
     const collection = await dbService.getCollection('recipe');
     await collection.updateOne({ _id: ObjectId(recipeId) }, { $set: { [field]: value } });
     // return recipe;
@@ -103,19 +103,25 @@ module.exports = {
 
 
 
-function _buildCriteria(filterBy) {
+function _buildCriteria(userId, filterBy) {
   const criteria = {};
-  const { word, labels } = filterBy;
+  const { term } = filterBy;
 
-  if (word) {
-    const txtCriteria = { $regex: word, $options: 'i' };
-    criteria.name = txtCriteria;
+  // console.log('_buildCriteria -> term', term)
+
+  if (term) {
+    const txtCriteria = { $regex: term, $options: 'i' };
+    // criteria.name = txtCriteria;
+    criteria['$or'] = [{ name: txtCriteria }, { ['ingredients.name']: txtCriteria }]
+    // criteria.ingredients = { name: txtCriteria }
   }
-  if (labels) {
-    criteria.labels = { $all: labels };
-  }
-  if (filterBy.type) {
-    criteria.inStock = { $eq: filterBy.type === 'instock' };
-  }
+  // { 'instock.qty': { $lte: 20 } }
+  // if (labels) {
+  //   criteria.labels = { $all: labels };
+  // }
+  // if (filterBy.type) {
+  //   criteria.inStock = { $eq: filterBy.type === 'instock' };
+  // }
+  criteria.userId = ObjectId(userId)
   return criteria;
 }
