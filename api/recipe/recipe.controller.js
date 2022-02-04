@@ -50,7 +50,6 @@ async function addRecipe(req, res) {
 async function updateRecipe(req, res) {
     try {
         const { data, type } = req.body;
-
         const { recipe, field, value, ingId } = data
 
         let savedRecipe
