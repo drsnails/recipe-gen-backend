@@ -45,13 +45,18 @@ async function addRecipe(req, res) {
 
 // Update
 
+
+/*TEST START*/
 async function updateRecipe(req, res) {
     try {
-        const { recipe, field, value, ingId } = req.body;
+        const { data, type } = req.body;
+
+        const { recipe, field, value, ingId } = data
+
         let savedRecipe
-        if (ingId && field !== null && value !== null) {
+        if (type === 'updateIng') {
             savedRecipe = await recipeService.updateIng(recipe._id, field, value, ingId);
-        } else if (field && value) {
+        } else if (type === 'updateRecipe') {
             savedRecipe = await recipeService.updateRecipe(recipe._id, field, value);
         } else {
             savedRecipe = await recipeService.update(recipe);
@@ -63,6 +68,31 @@ async function updateRecipe(req, res) {
         res.status(500).send({ err: 'Failed to update recipe' });
     }
 }
+/*TEST END*/
+
+
+
+/*ORIGINAL START*/
+// async function updateRecipe(req, res) {
+//     try {
+//         const { recipe, field, value, ingId } = req.body;
+//         let savedRecipe
+//         if (ingId && field !== null && value !== null) {
+//             savedRecipe = await recipeService.updateIng(recipe._id, field, value, ingId);
+//         } else if (field && value) {
+//             savedRecipe = await recipeService.updateRecipe(recipe._id, field, value);
+//         } else {
+//             savedRecipe = await recipeService.update(recipe);
+
+//         }
+//         res.json(savedRecipe);
+//     } catch (err) {
+//         logger.error('Failed to update recipe', err);
+//         res.status(500).send({ err: 'Failed to update recipe' });
+//     }
+// }
+/*ORIGINAL END*/
+
 
 async function updateIngredient(req, res) {
     try {
