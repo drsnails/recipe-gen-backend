@@ -7,6 +7,7 @@ module.exports = {
     query,
     getById,
     getByUsername,
+    getByGoogleId,
     remove,
     update,
     add
@@ -42,6 +43,7 @@ async function getById(userId) {
         throw err
     }
 }
+
 async function getByUsername(username) {
     try {
         const collection = await dbService.getCollection('user')
@@ -52,6 +54,18 @@ async function getByUsername(username) {
         throw err
     }
 }
+
+async function getByGoogleId(googleId) {
+    try {
+        const collection = await dbService.getCollection('user')
+        const user = await collection.findOne({ googleId })
+        return user
+    } catch (err) {
+        logger.error(`while finding user ${username}`, err)
+        throw err
+    }
+}
+
 
 async function remove(userId) {
     try {
@@ -87,6 +101,8 @@ async function add(user) {
             username: user.username,
             password: user.password,
             email: user.email,
+            googleId: user.googleId,
+            isGoogle: user.isGoogle
         }
         const collection = await dbService.getCollection('user')
         await collection.insertOne(userToAdd)

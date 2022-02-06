@@ -16,7 +16,7 @@ async function login(username, password) {
     return user
 }
 
-async function signup(username, password, email) {
+async function signup(username, password, email,isGoogle, googleId) {
     const saltRounds = 10
 
     logger.debug(`auth.service - signup with username: ${username}, email: ${email}`)
@@ -24,7 +24,7 @@ async function signup(username, password, email) {
     // data must be a string and salt must either be a salt string or a number of rounds
     password = password.toString();
     const hash = await bcrypt.hash(password, saltRounds)
-    return userService.add({ username, password: hash, email })
+    return userService.add({ username, password: hash, email, isGoogle, googleId })
 }
 
 module.exports = {
