@@ -11,6 +11,7 @@ async function login(username, password) {
     password = password.toString();
     const match = await bcrypt.compare(password, user.password)
     if (!match) return Promise.reject('Invalid username or password')
+    
 
     delete user.password
     return user

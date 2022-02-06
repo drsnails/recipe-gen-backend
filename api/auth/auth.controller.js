@@ -5,11 +5,13 @@ const recipeService = require('../recipe/recipe.service');
 const userService = require('../user/user.service');
 
 async function login(req, res) {
-    const { username, password } = req.body
+    const { username, password, googleId } = req.body
+    console.log('login -> googleId', googleId)
     console.log('req.body:', req.body);
 
     try {
         const user = await authService.login(username, password)
+       
         req.session.user = user
         req.session.cookie.maxAge = 1000 * 60 * 60;
         req.session.save()
@@ -22,7 +24,7 @@ async function login(req, res) {
 
 async function signup(req, res) {
     try {
-        const { username, password, email, isGoogle, googleId  } = req.body
+        const { username, password, email, isGoogle, googleId } = req.body
         logger.debug(email + ', ' + username + ', ' + password)
         const account = await authService.signup(username, password, email, isGoogle, googleId)
         const recipe = getFirstRecipe(account._id)
@@ -49,7 +51,7 @@ async function logout(req, res) {
 
 
 async function getUserByGoogleId(req, res) {
-    
+
     try {
         const { googleId } = req.params
         const user = await userService.getByGoogleId(googleId)
@@ -57,7 +59,7 @@ async function getUserByGoogleId(req, res) {
     } catch (err) {
         console.log('err:', err);
         throw err
-        
+
     }
 
 }
