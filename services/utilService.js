@@ -7,6 +7,7 @@ const getFirstRecipe = (userId) => {
         createdAt: Date.now(),
         userId,
         ingToScaleId: 'btkkq',
+        imgUrl: 'http://res.cloudinary.com/recipe-gen/image/upload/v1644241824/f2cgolspih5fld5wgbbj.jpg',
         instructions: 'Blend everything and cook for 30 minutes',
         ingredients: [
             {
@@ -18,13 +19,13 @@ const getFirstRecipe = (userId) => {
             {
                 id: 'eGJqi',
                 name: 'Mango',
-                amount: 700,
+                amount: 900,
                 units: 'g'
             },
             {
                 id: 'sa3Ja',
                 name: 'Garlic',
-                amount: 60,
+                amount: 80,
                 units: 'g'
             },
             {
@@ -36,19 +37,19 @@ const getFirstRecipe = (userId) => {
             {
                 id: 'MsnCU',
                 name: 'Water',
-                amount: 0.5,
+                amount: 0.8,
                 units: 'L'
             },
             {
                 id: '490v7',
                 name: 'Salt',
-                amount: 2,
+                amount: 1,
                 units: 'tableSpoon'
             },
             {
                 id: 'm5fRb',
                 name: 'Maple Syrup',
-                amount: 4,
+                amount: 2.5,
                 units: 'tableSpoon'
             }
         ]
