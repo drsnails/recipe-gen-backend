@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.291f44fe.css",
-    "main.js": "/static/js/main.c7c16a8b.js",
+    "main.css": "/static/css/main.4307a9f6.css",
+    "main.js": "/static/js/main.a4ca14c5.js",
     "static/js/787.dfb01e61.chunk.js": "/static/js/787.dfb01e61.chunk.js",
+    "static/media/pepper-logo.png": "/static/media/pepper-logo.90a6ca64421512472063.png",
     "index.html": "/index.html",
-    "main.291f44fe.css.map": "/static/css/main.291f44fe.css.map",
-    "main.c7c16a8b.js.map": "/static/js/main.c7c16a8b.js.map",
+    "main.4307a9f6.css.map": "/static/css/main.4307a9f6.css.map",
+    "main.a4ca14c5.js.map": "/static/js/main.a4ca14c5.js.map",
     "787.dfb01e61.chunk.js.map": "/static/js/787.dfb01e61.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.291f44fe.css",
-    "static/js/main.c7c16a8b.js"
+    "static/css/main.4307a9f6.css",
+    "static/js/main.a4ca14c5.js"
   ]
 }
