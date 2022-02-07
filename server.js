@@ -92,11 +92,13 @@ async function changeData() {
   const collection = await dbService.getCollection('recipe')
   const recipes = await collection.find({}).toArray();
   recipes.forEach(recipe => {
-    // recipe.instructions ??= ''
-    // recipeService.update(recipe)
+    if (recipe.name.includes('Mango Hot Sauce') && !recipe.imgUrl) {
+      // recipe.imgUrl = 'http://res.cloudinary.com/recipe-gen/image/upload/v1644241824/f2cgolspih5fld5wgbbj.jpg'
+      // recipeService.update(recipe)
+    }
 
   })
-  
+
 
 
 }
