@@ -2,12 +2,13 @@ const dbService = require('../../services/db.service');
 const logger = require('../../services/logger.service');
 const ObjectId = require('mongodb').ObjectId;
 
-async function query(userId = '', filterBy = { term: '' }) {
+async function query(userId = '', filterBy = { term: '', sortBy: '', sortDir: 1 }) {
   console.log('query -> filterBy', filterBy)
   try {
     const criteria = _buildCriteria(userId, filterBy);
+    const sortCriteria = _buildSort(filterBy.sortBy, filterBy.sortDir)
     const collection = await dbService.getCollection('recipe');
-    const recipes = await collection.find(criteria).toArray();
+    const recipes = await collection.find(criteria).sort(sortCriteria).toArray();
     return recipes;
   } catch (err) {
     logger.error('Can not find recipes', err);
@@ -115,9 +116,21 @@ function _buildCriteria(userId, filterBy) {
   }
 
   criteria.userId = ObjectId(userId)
+
+
   return criteria;
 }
 
+
+function _buildSort(sortBy, sortDir) {
+  if (!sortBy || sortBy === 'all') {
+    return { createdAt: -1 }
+  }
+  const sort = {}
+  sort[sortBy] = sortDir
+  return sort
+
+}
 
 
 
