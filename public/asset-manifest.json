@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.2ae07171.css",
-    "main.js": "/static/js/main.fea67dff.js",
+    "main.js": "/static/js/main.82903dc2.js",
     "static/js/139.36aeb24e.chunk.js": "/static/js/139.36aeb24e.chunk.js",
     "static/js/747.5207ea45.chunk.js": "/static/js/747.5207ea45.chunk.js",
     "static/js/688.b7159f43.chunk.js": "/static/js/688.b7159f43.chunk.js",
@@ -11,7 +11,7 @@
     "static/media/pepper-logo.png": "/static/media/pepper-logo.90a6ca64421512472063.png",
     "index.html": "/index.html",
     "main.2ae07171.css.map": "/static/css/main.2ae07171.css.map",
-    "main.fea67dff.js.map": "/static/js/main.fea67dff.js.map",
+    "main.82903dc2.js.map": "/static/js/main.82903dc2.js.map",
     "139.36aeb24e.chunk.js.map": "/static/js/139.36aeb24e.chunk.js.map",
     "747.5207ea45.chunk.js.map": "/static/js/747.5207ea45.chunk.js.map",
     "688.b7159f43.chunk.js.map": "/static/js/688.b7159f43.chunk.js.map",
@@ -21,6 +21,6 @@
   },
   "entrypoints": [
     "static/css/main.2ae07171.css",
-    "static/js/main.fea67dff.js"
+    "static/js/main.82903dc2.js"
   ]
 }
