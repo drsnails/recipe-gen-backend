@@ -1,7 +1,6 @@
 const recipeService = require('./recipe.service.js');
 const logger = require('../../services/logger.service');
 
-const { async } = require('rxjs');
 
 // List
 
