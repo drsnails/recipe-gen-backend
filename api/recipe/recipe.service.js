@@ -3,7 +3,6 @@ const logger = require('../../services/logger.service');
 const ObjectId = require('mongodb').ObjectId;
 
 async function query(userId = '', filterBy = { term: '', sortBy: '', sortDir: 1 }) {
-  console.log('query -> filterBy', filterBy)
   try {
     const criteria = _buildCriteria(userId, filterBy);
     const sortCriteria = _buildSort(filterBy.sortBy, filterBy.sortDir)

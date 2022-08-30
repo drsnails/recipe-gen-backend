@@ -1,15 +1,15 @@
 const {
-  requireAuth,
-  requireAdmin,
+    requireAuth,
+    requireAdmin,
 } = require('../../middlewares/requireAuth.middleware');
 const express = require('express');
 const { log } = require('../../middlewares/logger.middleware');
 const {
-  getRecipes,
-  getRecipeById,
-  addRecipe,
-  updateRecipe,
-  removeRecipe,
+    getRecipes,
+    getRecipeById,
+    addRecipe,
+    updateRecipe,
+    removeRecipe,
 } = require('./recipe.controller');
 const router = express.Router();
 

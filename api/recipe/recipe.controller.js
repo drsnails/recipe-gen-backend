@@ -1,6 +1,8 @@
 const recipeService = require('./recipe.service.js');
 const logger = require('../../services/logger.service');
 
+const { async } = require('rxjs');
+
 // List
 
 async function getRecipes(req, res) {
@@ -118,10 +120,13 @@ async function removeRecipe(req, res) {
         res.status(500).send({ err: 'Failed to delete recipe' });
     }
 }
+
+
 module.exports = {
     getRecipes,
     getRecipeById,
     addRecipe,
     updateRecipe,
-    removeRecipe
+    removeRecipe,
 };
+
