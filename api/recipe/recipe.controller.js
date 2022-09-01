@@ -6,6 +6,7 @@ const logger = require('../../services/logger.service');
 
 async function getRecipes(req, res) {
     try {
+        console.log('process.env.apiKey:', process.env.apiKey)
         const { userId, filterBy: _filterBy } = req.query;
         const filterBy = JSON.parse(_filterBy)
         // console.log('getRecipes -> filterBy', filterBy)
