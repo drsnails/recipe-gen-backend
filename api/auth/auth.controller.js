@@ -6,8 +6,7 @@ const userService = require('../user/user.service');
 
 async function login(req, res) {
     const { username, password, googleId } = req.body
-    console.log('login -> googleId', googleId)
-    console.log('req.body:', req.body);
+    
 
     try {
         const user = await authService.login(username, password)
