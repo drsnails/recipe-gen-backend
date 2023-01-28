@@ -60,6 +60,7 @@ app.get('/**', (req, res) => {
 const logger = require('./services/logger.service');
 const recipeService = require('./api/recipe/recipe.service');
 const port = process.env.PORT || 3030;
+
 app.listen(port, () => {
   logger.info('Server is running on port: ' + port);
 });
