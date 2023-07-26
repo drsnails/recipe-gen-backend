@@ -10,7 +10,6 @@ async function login(req, res) {
 
     try {
         const user = await authService.login(username, password)
-       
         req.session.user = user
         req.session.cookie.maxAge = 1000 * 60 * 60;
         req.session.save()

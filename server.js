@@ -68,6 +68,7 @@ app.listen(port, () => {
 
 // populate()
 async function populate() {
+  return
   const collection = await dbService.getCollection('recipe')
   const recipes = [
     {
