@@ -10,10 +10,10 @@ const http = require('http').createServer(app);
 
 // session setup
 const session = expressSession({
-  secret: 'coding is amazing',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false },
+    secret: 'coding is amazing',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
 });
 // Express App Config
 app.use(express.json());
@@ -21,22 +21,22 @@ app.use(session);
 app.use(express.static('public'));
 
 if (process.env.NODE_ENV === 'production') {
-  // Express serve static files on production environment
-  app.use(express.static(path.resolve(__dirname, 'public')));
+    // Express serve static files on production environment
+    app.use(express.static(path.resolve(__dirname, 'public')));
 } else {
-  // Configuring CORS
-  const corsOptions = {
-    // Make sure origin contains the url your frontend is running on
-    origin: [
-      'http://127.0.0.1:8080',
-      'http://localhost:8080',
-      'http://127.0.0.1:3000',
-      'http://localhost:3000',
-      'http://localhost:3001',
-    ],
-    credentials: true,
-  };
-  app.use(cors(corsOptions));
+    // Configuring CORS
+    const corsOptions = {
+        // Make sure origin contains the url your frontend is running on
+        origin: [
+            'http://127.0.0.1:8080',
+            'http://localhost:8080',
+            'http://127.0.0.1:3000',
+            'http://localhost:3000',
+            'http://localhost:3001',
+        ],
+        credentials: true,
+    };
+    app.use(cors(corsOptions));
 }
 
 const authRoutes = require('./api/auth/auth.routes');
@@ -54,7 +54,7 @@ app.use('/api/recipe', recipeRoutes);
 // connectSockets(http, session)
 
 app.get('/**', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 const logger = require('./services/logger.service');
@@ -62,43 +62,44 @@ const recipeService = require('./api/recipe/recipe.service');
 const port = process.env.PORT || 3030;
 
 app.listen(port, () => {
-  logger.info('Server is running on port: ' + port);
+    logger.info('Server is running on port: ' + port);
 });
 
 
 // populate()
 async function populate() {
-  return
-  const collection = await dbService.getCollection('recipe')
-  const recipes = [
-    {
-      name: 'mango hot sauce',
-      userId: '61f68f802d598abcfccdd290',
-      createdAt: Date.now(),
-      ingToScaleId: 'r101',
-      ingredients: [
-        { id: 'r101', name: 'habanero', amount: 500, units: 'g' },
-        { id: 'r102', name: 'mango', amount: 300, units: 'g' },
-        { id: 'r103', name: 'vinegar', amount: 200, units: 'mL' },
-        { id: 'r104', name: 'water', amount: 350, units: 'mL' },
-      ]
-    },
+    return
+    const collection = await dbService.getCollection('recipe')
+    const recipes = [
+        {
+            name: 'mango hot sauce',
+            userId: '61f68f802d598abcfccdd290',
+            createdAt: Date.now(),
+            ingToScaleId: 'r101',
+            ingredients: [
+                { id: 'r101', name: 'habanero', amount: 500, units: 'g' },
+                { id: 'r102', name: 'mango', amount: 300, units: 'g' },
+                { id: 'r103', name: 'vinegar', amount: 200, units: 'mL' },
+                { id: 'r104', name: 'water', amount: 350, units: 'mL' },
+            ]
+        },
 
-  ]
-  // tasks = await collection.insertMany(recipes)
+    ]
+    // tasks = await collection.insertMany(recipes)
 }
 
 
 // changeData()
 async function changeData() {
-  const collection = await dbService.getCollection('recipe')
-  const recipes = await collection.find({}).toArray();
-  recipes.forEach(recipe => {
-    if (recipe.name.includes('Mango Hot Sauce') && !recipe.imgUrl) {
-      // recipe.imgUrl = 'http://res.cloudinary.com/recipe-gen/image/upload/v1644241824/f2cgolspih5fld5wgbbj.jpg'
-      // recipeService.update(recipe)
-    }
+    return
+    const collection = await dbService.getCollection('recipe')
+    const recipes = await collection.find({}).toArray();
+    recipes.forEach(recipe => {
+        if (recipe.name.includes('Mango Hot Sauce') && !recipe.imgUrl) {
+            // recipe.imgUrl = 'http://res.cloudinary.com/recipe-gen/image/upload/v1644241824/f2cgolspih5fld5wgbbj.jpg'
+            // recipeService.update(recipe)
+        }
 
-  })
+    })
 
 }
