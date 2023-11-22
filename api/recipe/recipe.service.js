@@ -2,7 +2,7 @@ const dbService = require('../../services/db.service');
 const logger = require('../../services/logger.service');
 const ObjectId = require('mongodb').ObjectId;
 
-async function query(userId = '', filterBy = { term: '', sortBy: '', sortDir: 1 }) {
+async function query(userId = '', filterBy = { term: '', sortBy: '', sortDir: 1, startIdx }) {
   try {
     const criteria = _buildCriteria(userId, filterBy);
     const sortCriteria = _buildSort(filterBy.sortBy, filterBy.sortDir)
@@ -115,6 +115,8 @@ function _buildCriteria(userId, filterBy) {
   }
 
   criteria.userId = ObjectId(userId)
+
+  
 
 
   return criteria;
